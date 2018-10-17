@@ -3,17 +3,39 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "mock": "nodemon mockServer/server.js",
     "serve": "vue-cli-service serve",
+    "start": "concurrently \"npm run serve\" \"npm run mock\"",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "vue": "^2.5.17"
+    "axios": "^0.18.0",
+    "dns": "^0.2.2",
+    "element-ui": "^2.4.8",
+    "net": "^1.0.2",
+    "qs": "^6.5.2",
+    "vue": "^2.5.17",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.5",
     "@vue/cli-plugin-eslint": "^3.0.5",
     "@vue/cli-service": "^3.0.5",
+    "boom": "^7.2.0",
+    "captchapng": "^0.0.1",
+    "concurrently": "^4.0.1",
+    "koa": "^2.5.3",
+    "koa-body": "^4.0.4",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "koa2-cors": "^2.0.6",
+    "less": "^3.8.1",
+    "less-loader": "^4.1.0",
+    "mockjs": "^1.0.1-beta3",
+    "nodemon": "^1.18.4",
+    "style-resources-loader": "^1.2.1",
     "vue-template-compiler": "^2.5.17"
   },
   "eslintConfig": {
@@ -22,8 +44,7 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
+      "plugin:vue/essential"
     ],
     "rules": {},
     "parserOptions": {
