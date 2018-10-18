@@ -7,5 +7,6 @@ module.exports = function createCaptcha() {
 
   let img = p.getBase64()
   
-  return 'data:image/png;base64,' + img
+  // return 'data:image/png;base64,' + img
+  return new Buffer(img, 'base64')
 }

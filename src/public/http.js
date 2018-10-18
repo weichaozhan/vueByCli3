@@ -4,6 +4,8 @@ import Vue from 'vue'
 import router from '@/router'
 import { Message } from 'element-ui'
 
+import { BASE_URL } from './constant'
+
 Vue.prototype.$message = Message
 
 /**
@@ -23,10 +25,10 @@ const http = (config) => {
 
   // Content-Type 为 application/x-www-form-urlencoded 时序列化 data
   let data = (!headers['Content-Type'] || headers['Content-Type'] === 'application/x-www-form-urlencoded') ? Qs.stringify(config.data) : (config.data || '')
-
+console.log(headers['Content-Type'])
   const newRequest = new Promise((resolve, reject) => {
     axios({
-      baseURL: 'http://localhost:9091',
+      baseURL: BASE_URL,
       url: config.url,
       method: config.method || 'get',
       headers: headers,
@@ -48,7 +50,7 @@ const http = (config) => {
         }
       })
       .catch(function(error) {
-        console.log(error.response.status)
+        console.log(error)
         reject(error)
       })
   })

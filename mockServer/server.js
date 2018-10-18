@@ -11,7 +11,7 @@ const port = 9091
 
 // 跨域处理
 app.use(CORS({
-  origin: 'http://localhost:8080',
+  origin: 'http://localhost:3001',
   credentials: true,
   allowMethods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
   expose: ['Authorization']

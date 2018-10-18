@@ -18,7 +18,9 @@ module.exports = function (router, koaBody) {
   })
   // 验证码
   router.get('/captcha', koaBody(), async (ctx, next) => {
+    ctx.response.set('content-type', 'image/png')
     ctx.body = createCaptcha()
+    
     await next()
   })
 }

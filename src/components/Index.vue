@@ -6,7 +6,6 @@
 
 <script>
 // const LoginPage = () => import('./LoginPage.vue')
-import { testAPI } from '@/api/globalAPI'
 
 export default {
   name: "",
@@ -14,15 +13,6 @@ export default {
     return {};
   },
   mounted() {
-      testAPI({
-        firstName: 'a'
-      })
-      .then(res => {
-        console.log(res)
-      })
-      .catch(err => {
-        console.log('index err', new Error(err))
-      })
   }
 }
 </script>
