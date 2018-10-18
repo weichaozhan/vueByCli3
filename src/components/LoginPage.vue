@@ -73,13 +73,11 @@ export default {
      * 提交登陆操作
      */
     submitLoginForm() {
+      const formLogin = {...this.formLogin}
+
       this.$refs.formLogin.validate(valid => {
         if (valid) {
-          loginAPI({
-            username: 'admin',
-            password: '123456',
-            code: 123456
-          })
+          loginAPI(formLogin)
             .then(res => {
               const {
                 code,
@@ -90,7 +88,7 @@ export default {
               if (code === 1000) {
                 localStorage.setItem('token', data.token)
                 localStorage.setItem('rid', data.tid)
-                localStorage.setItem('username', 'admin')
+                localStorage.setItem('username', formLogin.username)
     
                 this.$message({
                   type: 'success',
