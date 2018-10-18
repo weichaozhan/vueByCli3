@@ -25,7 +25,7 @@ const http = (config) => {
 
   // Content-Type 为 application/x-www-form-urlencoded 时序列化 data
   let data = (!headers['Content-Type'] || headers['Content-Type'] === 'application/x-www-form-urlencoded') ? Qs.stringify(config.data) : (config.data || '')
-console.log(headers['Content-Type'])
+
   const newRequest = new Promise((resolve, reject) => {
     axios({
       baseURL: BASE_URL,

@@ -1,14 +1,14 @@
 <template>
   <div class="child-vhc wrapper--login">
     <div class="form--login">
-      <el-form :model="formLogin">
+      <el-form ref="formLogin" :model="formLogin" :rules="rules">
         <el-form-item prop="username">
           <el-input v-model="formLogin.username"></el-input>
         </el-form-item>
         <el-form-item prop="password">
           <el-input v-model="formLogin.password"></el-input>
         </el-form-item>
-        <el-form-item>
+        <el-row :gutter="20">
           <el-col :span="12">
             <el-form-item prop="code">
               <el-input v-model="formLogin.code"></el-input>
@@ -17,9 +17,12 @@
           <el-col :span="12">
             <!-- 获取验证码 -->
             <div class="captcha--wrapper child-vhc">
-              <img :src="`http://localhost:9091/captcha`" @click="this.getCaptcha">
+              <img ref="ads" @click="this.getCaptcha">
             </div>
           </el-col>
+        </el-row>
+        <el-form-item>
+          <el-button type="primary" @click="submitLoginForm">提交</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -44,6 +47,17 @@ export default {
         username: '',
         password: '',
         code: ''
+      },
+      rules: {
+        username: [{
+          required: true, message: '请输入用户名', trigger: 'blur'
+        }],
+        password: [{
+          required: true, message: '请输入密码', trigger: 'blur'
+        }],
+        code: [{
+          required: true, message: '请输入验证码', trigger: 'blur'
+        }]
       }
     }
   },
@@ -52,48 +66,49 @@ export default {
      * 获取验证码
      */
     getCaptcha() {
-      getCaptchaAPI()
-        .then(res => {
-          this.codeImg = res.data
-        })
+      this.$refs.ads.setAttribute('src', `${BASE_URL}/captcha?t=${Date.now()}`)
     },
 
     /**
      * 提交登陆操作
      */
     submitLoginForm() {
-      loginAPI({
-        username: 'admin',
-        password: '123456',
-        code: 123456
+      this.$refs.formLogin.validate(valid => {
+        if (valid) {
+          loginAPI({
+            username: 'admin',
+            password: '123456',
+            code: 123456
+          })
+            .then(res => {
+              const {
+                code,
+                data,
+                msg
+              } = res.data
+    
+              if (code === 1000) {
+                localStorage.setItem('token', data.token)
+                localStorage.setItem('rid', data.tid)
+                localStorage.setItem('username', 'admin')
+    
+                this.$message({
+                  type: 'success',
+                  message: '登陆成功！'
+                })
+                // 改变登录状态为已登录
+                this.$store.commit('moduleLogin/login')
+                // 跳转到应用
+                this.$router.push('/')
+              } else {
+                this.$message({
+                  type: 'error',
+                  message: msg
+                })
+              }
+            })
+        }
       })
-        .then(res => {
-          const {
-            code,
-            data,
-            msg
-          } = res.data
-
-          if (code === 1000) {
-            localStorage.setItem('token', data.token)
-            localStorage.setItem('rid', data.tid)
-            localStorage.setItem('username', 'admin')
-
-            this.$message({
-              type: 'success',
-              message: '登陆成功！'
-            })
-            // 改变登录状态为已登录
-            this.$store.commit('moduleLogin/login')
-            // 跳转到应用
-            this.$router.push('/')
-          } else {
-            this.$message({
-              type: 'error',
-              message: msg
-            })
-          }
-        })
     }
   },
   mounted() {
@@ -117,7 +132,7 @@ export default {
   width: 400px;
   min-height: 200px;
   padding: 30px 20px;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.6);
   border-radius: 6px;
 }
 .captcha--wrapper {

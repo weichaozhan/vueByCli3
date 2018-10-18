@@ -14,16 +14,3 @@ export const loginAPI = (data) => {
     }
   })
 }
-
-/**
- * 获取验证码接口
- */
-export const getCaptchaAPI = () => {
-  return http({
-    url: '/captcha',
-    method: 'get',
-    headers: {
-      'Content-Type': 'image/png'
-    }
-  }) 
-}

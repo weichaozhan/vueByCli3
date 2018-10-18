@@ -32,7 +32,7 @@ const routes = [
 ]
 const router = new vueRouter({ routes })
 
-if (localStorage.getItem('token')) {
+if (localStorage.getItem('token') || localStorage.getItem('rid')) {
   store.commit('moduleLogin/login')
 }
 
@@ -40,7 +40,6 @@ router.beforeEach((to, from, next) => {
   if (!store.state.moduleLogin.isLogin && to.path !== '/login') {
     next('/login')
   } else {
-    console.log(to.path, to.path == '/login')
     next()
   }
 })
