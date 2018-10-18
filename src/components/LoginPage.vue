@@ -59,4 +59,10 @@ export default {
 </script>
 
 <style scoped lang="less">
+* {
+  color: blue;
+  div {
+    font-size: 12px;
+  }
+}
 </style>
