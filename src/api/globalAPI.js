@@ -9,7 +9,7 @@ export const loginAPI = (data) => {
         url: '/users/login',
         method: 'post',
         data: data,
-        header: {
+        headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         }
     })

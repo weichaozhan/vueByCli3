@@ -11,16 +11,18 @@ Vue.prototype.$message = Message;
 /**
  * axios 请求封装
  * @param {Object} config axios 配置
+ * @param {Boolean} isUploadFile 是否为上传文件的请求，true 为上传类型
  */
-const http = (config) => {
-    let headers = {
-        'Content-Type': 'application/json'
-    }
+const http = (config, isUploadFile = false) => {
+    let headers = {}
 
+    if (!isUploadFile) {
+        headers['Content-Type'] = 'application/json';
+    }
+    
     if (config.headers) {
         headers = Object.assign(headers, config.headers);
     }
-
     headers['Content-Type'] === 'application/json' && (
         headers['Authorization'] = `${localStorage.getItem('token')}`
     );
@@ -52,7 +54,7 @@ const http = (config) => {
                 console.log(error);
                 reject(error);
             })
-        })
+    });
 
     return newRequest;
 }

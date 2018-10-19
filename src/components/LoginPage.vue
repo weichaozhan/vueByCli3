@@ -11,7 +11,7 @@
                 </el-form-item>
                 <el-row :gutter="20">
                     <el-col :span="12">
-                        <el-form-item prop="code">
+                        <el-form-item prop="code" @keyup.enter.native="submitLoginForm">
                             <el-input v-model="formLogin.code"></el-input>
                         </el-form-item>
                     </el-col>
@@ -75,10 +75,7 @@ export default {
          * 获取验证码
          */
         getCaptcha() {
-            this
-                .$refs
-                .ads
-                .setAttribute('src', `${BASE_URL}/captcha?t=${Date.now()}`)
+            this.$refs.ads.setAttribute('src', `${BASE_URL}/captcha?t=${Date.now()}`)
         },
 
         /**

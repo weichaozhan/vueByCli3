@@ -6,6 +6,7 @@ import gActions from './actions';
 
 import moduleA from './modules/moduleA';
 import moduleLogin from './modules/moduleLogin';
+import menu from './modules/menu';
 
 Vue.use(Vuex);
 
@@ -18,6 +19,7 @@ const storeInit = {
     modules: {
         moduleA,
         moduleLogin,
+        menu,
     },
 }
 const store = new Vuex.Store(storeInit);
