@@ -1,20 +1,18 @@
+<!-- 无效路由 404 页面 -->
 <template>
-  <div>
+    <div>
     Not Found
-  </div>
+    </div>
 </template>
 
 <script>
 export default {
-  name:'',
-  data(){
-    return {
-
+    name: "",
+    data() {
+        return {};
     }
-  }
-}
+};
 </script>
 
 <style scoped>
-
 </style>

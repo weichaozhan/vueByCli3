@@ -1,5 +1,5 @@
 export default {
-  increment (context) {
-    context.commit('increment')
-  }
+    increment(context) {
+        context.commit('increment');
+    },
 }
