@@ -5,15 +5,17 @@
         <div class="main-container">
             <nav-menu class="nav"></nav-menu>
             <div class="content">
-
+                <main-content>
+                </main-content>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-const AppHeader = () => import ("./appHeader/AppHeader.vue");
-const NavMenu = () => import("./menu/Index.vue");
+const AppHeader = () => import ('./appHeader/AppHeader.vue');
+const NavMenu = () => import('./menu/Index.vue');
+const MainContent = () => import('./mainContent/Index.vue');
 
 import moment from "moment";
 import { setTimeout } from 'timers';
@@ -23,6 +25,7 @@ export default {
     components: {
         AppHeader,
         NavMenu,
+        MainContent,
     },
 };
 </script>
