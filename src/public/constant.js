@@ -1,5 +1,4 @@
-// export const BASE_URL = 'http://localhost:9091';
-export const BASE_URL = 'http://192.168.1.180/819_operation';
+export const BASE_URL = 'http://localhost:9091';
 
 // 定义 APP 内容组件名称
 export const APP_COMPONENTS = {
@@ -18,12 +17,12 @@ export const MENU_LIST = [
         children: [
             {
                 id: 2,
-                name: '医生用户管理',
+                name: '用户管理1',
                 icon: 'el-icon-news',
             },
             {
                 id: 3,
-                name: '患者用户管理',
+                name: '用户管理2',
                 icon: 'el-icon-news',
             },
         ],

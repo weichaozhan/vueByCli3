@@ -3,7 +3,7 @@
     <div class="wrapper-index">
         <div class="sum-count">
             <h3>
-                医生注册总人数
+                注册总人数1
             </h3>
             <p>
                 {{doctorNum}}
@@ -11,7 +11,7 @@
         </div>
         <div class="sum-count">
             <h3>
-                平台总问诊数
+                平台总人数
             </h3>
             <p>
                 {{inquisitionNum}}
@@ -19,7 +19,7 @@
         </div>
         <div class="sum-count">
             <h3>
-                用户注册总人数
+                注册总人数2
             </h3>
             <p>
                 {{patientNum}}
