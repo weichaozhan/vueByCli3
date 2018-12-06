@@ -22,6 +22,39 @@ module.exports = {
     },
     // gzip 压缩
     configureWebpack: config => {
+        // 依赖代码分离，避免 vendor 过大
+        config.optimization = {
+            splitChunks: {
+                name: true,
+                chunks: 'all',
+                cacheGroups: {
+                    vue: {
+                        test: (module) => {
+                            return /vue/.test(module.context);
+                        },
+                        name: 'vue',
+                    },
+                    elementui: {
+                        test: (module) => {
+                            return /element-ui/.test(module.context);
+                        },
+                        name: 'elementui',
+                    },
+                    moment: {
+                        test: (module) => {
+                            return /moment/.test(module.context);
+                        },
+                        name: 'moment',
+                    },
+                    commons: {
+                        test: /[\\/]node_modules[\\/]/,
+                        name: 'vendors',
+                        priority: -1,
+                        // reuseExistingChunk: true,
+                    },
+                },
+            }
+        }
         if (isProduction) {
             config.plugins.push(new CompressionWebpackPlugin({
                 algorithm: 'gzip',
