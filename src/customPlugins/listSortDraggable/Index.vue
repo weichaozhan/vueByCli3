@@ -16,22 +16,34 @@ export default {
     },
     props: {
         value: {
-            required: true,
             type: Array,
-        }
+        },
+        options: {
+            type: Object,
+            default: () => {
+                return {};
+            },
+        },
+        listWrapperSelector: {
+            type: String,
+            default: '',
+        },
     },
     methods: {
         /**
          * 设置拖拽
          */
         setDrag() {
-            const el = document.querySelector(`#${this.wrapperId} .el-table__body-wrapper table tbody`);
-    
-            Sortable.create(el, {
-                draggable: 'tr',
-                onEnd: ({oldIndex, newIndex}) => {
-                    // 同步虚拟 DOM，与真是 DOM
-                    if (oldIndex !== newIndex) {
+            const el = document.querySelector(`#${this.wrapperId} ${this.listWrapperSelector}`);
+            const options = Object.assign({}, this.options, {
+                onEnd: (e) => {
+                    const { oldIndex, newIndex } = e;
+
+                    // 同步虚拟 DOM，与真实 DOM
+                    if (
+                        this.value && 
+                        oldIndex !== newIndex
+                    ) {
                         const trList = el.children;
                         const newTr = trList[newIndex];
                         const oldTr = trList[oldIndex];
@@ -50,9 +62,13 @@ export default {
         
                         valueCache.splice(newIndex, 0, crr[0]);
                         this.$emit('input', valueCache);    
-                    }                    
+                    }
+                    
+                    this.options.onEnd && this.options.onEnd(e);
                 },
             });
+    
+            Sortable.create(el, options);
         },
     },
     mounted() {
